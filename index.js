@@ -16,6 +16,23 @@ const client = new MongoClient(uri, {
   serverApi: ServerApiVersion.v1,
 });
 
+async function run() {
+  try {
+    await client.connect();
+    const productCollection = client.db("wholeSomeTech").collection("product");
+
+    app.get("/product", async (req, res) => {
+      const query = {};
+      const cursor = productCollection.find(query);
+      const products = await cursor.toArray();
+      res.send(products);
+    });
+  } finally {
+  }
+}
+
+run().catch(console.dir);
+
 app.get("/", (req, res) => {
   res.send("Running my Wholesome server");
 });
