@@ -77,6 +77,10 @@ app.get("/", (req, res) => {
   res.send("Running my Wholesome server");
 });
 
+app.get("/hero", (req, res) => {
+  res.send("Hero meets the real hero");
+});
+
 app.listen(port, () => {
   console.log("Wholesome tech is running", port);
 });
