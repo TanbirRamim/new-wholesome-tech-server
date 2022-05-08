@@ -33,6 +33,21 @@ async function run() {
 
       res.send({ item });
     });
+
+    //POST
+    app.post("/product", async (req, res) => {
+      const newItem = req.body;
+      const output = await productCollection.insertOne(newItem);
+      res.send(output);
+    });
+
+    //DELETE
+    app.delete("/cardDetails/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const output = await productCollection.deleteOne(query);
+      res.send(output);
+    });
   } finally {
   }
 }
